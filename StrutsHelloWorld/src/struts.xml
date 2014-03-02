@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation"
+		value="false" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.custom.i18n.resources"
+		value="ApplicationResources" />
+		
+<package name="default" extends="struts-default" namespace="/">
+	<result-types> 
+            <result-type name="tiles"
+                class="org.apache.struts2.views.tiles.TilesResult" /> 
+        </result-types>
+	
+	<interceptors>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="token" />
+    			<interceptor-ref name="basicStack"/>
+			</interceptor-stack>
+		</interceptors>
+		
+		<action name="GuestEntry" >
+			<result>GuestEntry.jsp</result>
+		</action>
+		<action name="GuestView" class="net.viralpatel.struts2.GuestViewAction">
+			<interceptor-ref name="myStack" />
+			<result name="success">GuestView.jsp</result>
+			<result name="invalid.token">Error.jsp</result>
+		</action>
+			<!-- <action name="vilas"
+			class="net.viralpatel.struts2.CopyOfCustomerAction">
+			<result name="success">index.jsp</result>
+			<result name="error">Footer.jsp</result>
+		</action>
+		<action name="login"
+			class="net.viralpatel.struts2.LoginAction">
+			<result name="success">welcome.tiles</result>
+			<result name="error">Login.jsp</result>
+		</action>
+		<action name="addcustomer"
+			class="net.viralpatel.struts2.CustomerAction">
+			
+			<result name="success">customer.success.tiles</result>
+			<result name="input">customer.tiles</result>
+			
+		</action> -->
+	</package>
+</struts>
+
